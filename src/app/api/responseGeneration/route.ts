@@ -13,6 +13,11 @@ export async function GET() {
     const initialPromptResponse = await ai.models.generateContent({
       model: "gemini-2.0-flash",
       contents: [{
+        
+          role: "user",
+          text: "create a simple todo calculator in nextjs"
+        
+      },{
         role: "user",
         text: "Return either node or react or nextjs code based on what do you think the project should be. Only return a single word, either 'node', 'react' or 'nextjs'. Do not return any other text."
       }]
@@ -43,24 +48,21 @@ export async function GET() {
     console.log(`Using ${projectType} template`);
     
     // Now generate the actual project content using the selected template
-    const basePrompt = templateToUse; // This should be your template string
+    const baseTemplate = templateToUse; // This should be your template string
     
     const response = await ai.models.generateContentStream({
       model: "gemini-2.0-flash",
       contents: [
         {
           role: "user",
-          text: "For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.\n\nBy default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.\n\nUse icons from lucide-react for logos.\n\nUse stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags."
+          text: "Now make the application what user has indicated in the tech stack. For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.\n\nBy default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.\n\nUse icons from lucide-react for logos.\n\nUse stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags."
         },
         {
           role: "user",
           text: `\n\nHere is an artifact that contains all files of the project visible to you.
-Consider the contents of ALL files in the project.\n\n${basePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n\n`
+        Consider the contents of ALL files in the project.\n\n${baseTemplate}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n\n`
         },
-        {
-          role: "user",
-          text: "create a simple todo calculator"
-        }
+        
       ],
       config: {
         systemInstruction: getSystemPrompt()
@@ -69,6 +71,7 @@ Consider the contents of ALL files in the project.\n\n${basePrompt}\n\nHere is a
     
     for await (const chunk of response) {
       console.log(chunk.text);
+      return NextResponse.json({ text: chunk.text }, { status: 200 });
       
   }
   
