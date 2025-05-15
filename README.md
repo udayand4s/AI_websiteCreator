@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# ⚡ AI Website Creator
+
+Effortless, intelligent website and app generation—driven by AI.
+
+Turn a simple prompt into a complete, production-ready application using modern frameworks. No design files. No boilerplate. Just results.
+
+---
+
+## ✨ Features
+
+* **Prompt-to-App in Seconds**
+  Describe what you want—get a complete site or application instantly.
+
+* **Multiple Framework Templates**
+  Supports **Next.js**, **React**, and **Node.js** starter templates, with best practices built-in.
+
+* **Smart Prompt Engine**
+  Uses curated base prompts to guide the AI for consistently structured and usable code.
+
+* **Gemini AI (Latest Model)**
+  Powered by Google’s latest Gemini model for high-quality code and design generation.
+
+* **Responsive Design**
+  Every output is optimized for all screen sizes out of the box.
+
+* **Editable and Exportable**
+  Refine your result, preview instantly, and export clean code when ready.
+
+---
+
+## 🧠 How It Works
+
+1). **Enter a Prompt**
+   e.g., *"A modern landing page for a SaaS analytics tool." It automatically selects a template for your application with additional prompts hardcoded into the codebase*
+
+3. **AI Generates the Application**
+   Gemini responds with a tailored, structured codebase and layout—ready to run.
+
+4. **Preview or Export**
+   Instantly preview in-browser or download the complete project.
+
+---
+
+## 🛠 Tech Stack
+
+* **Next.js + TypeScript**
+* **Tailwind CSS**
+* **Gemini API (latest model)**
+* **Vercel (hosting + serverless deployment)**
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+git clone https://github.com/your-username/ai-website-creator.git
+cd ai-website-creator
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Deployment
 
-## Learn More
+This app is preconfigured for seamless deployment on **Vercel**.
+Just push to GitHub, connect your project, and go live.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧪 Example Prompts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* "A portfolio site for a freelance photographer"
+* "A task manager app with login and dashboard"
+* "A landing page for a crypto wallet"
+* "A Node.js REST API for book reviews"
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
+Use it. Modify it. Build something better.
+
