@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Search, Settings, Home, List, Plus, Calendar, Clock, Star, ChevronDown, Code, Wand2, Bell, ShoppingBag, CheckSquare } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HomePage() {
   const [prompt, setPrompt] = useState('');
@@ -137,9 +138,11 @@ export default function HomePage() {
                 onChange={(e) => setPrompt(e.target.value)}
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-400 h-6 w-6" />
+              <Link href='/pages/generator'>
               <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white rounded-lg px-5 py-2 hover:bg-indigo-700 transition">
                 Generate
               </button>
+              </Link>
             </div>
           </div>
 
