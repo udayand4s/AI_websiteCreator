@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
-import { getSystemPrompt } from "../prompt/route";
+import { getSystemPrompt } from "../prompt/SystemPrompt";
 import { basePrompt as node } from "@/app/api/defaults/node";
 import { basePrompt as react } from "@/app/api/defaults/react";
 import { basePrompt as next } from "@/app/api/defaults/next";
