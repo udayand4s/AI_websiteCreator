@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getSystemPrompt } from "../prompt/SystemPrompt";
 import { basePrompt as node } from "@/app/api/defaults/node";
 import { basePrompt as react } from "@/app/api/defaults/react";
@@ -7,7 +7,15 @@ import { basePrompt as next } from "@/app/api/defaults/next";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-export async function GET() {
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const { prompt } = body;
+  console.log("Prompt received:", prompt);
+  // Check if the prompt is empty or undefined
+  if (!prompt || prompt.trim() === "") {
+    return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
+  }
+
   try {
     // First, determine which type of project to create
     const initialPromptResponse = await ai.models.generateContent({
@@ -15,7 +23,7 @@ export async function GET() {
       contents: [{
         
           role: "user",
-          text: "create a simple todo calculator in nextjs"
+          text: prompt
         
       },{
         role: "user",
@@ -55,7 +63,7 @@ export async function GET() {
       contents: [
         {
           role: "user",
-          text: "Now make the application what user has indicated in the tech stack. For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.\n\nBy default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.\n\nUse icons from lucide-react for logos.\n\nUse stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags."
+          text: `Now make the application what user has indicated in the tech stack.It should be made in ${baseTemplate}. For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.\n\nBy default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.\n\nUse icons from lucide-react for logos.\n\nUse stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags.`
         },
         {
           role: "user",
@@ -71,9 +79,8 @@ export async function GET() {
     
     for await (const chunk of response) {
       console.log(chunk.text);
-      return NextResponse.json({ text: chunk.text }, { status: 200 });
-      
   }
+   return NextResponse.json({ message: "Stream finished" }, { status: 200 });
   
 }catch (error) {
     console.error('Error:', error);
