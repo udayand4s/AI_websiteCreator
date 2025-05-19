@@ -79,8 +79,13 @@ export async function POST(request: NextRequest) {
     
     for await (const chunk of response) {
       console.log(chunk.text);
+      if (chunk.text) {
+        const responseText =chunk.text;
+        console.log("Response text:", responseText);
+        return NextResponse.json({ response: responseText });
+      }
   }
-   return NextResponse.json({ message: "Stream finished" }, { status: 200 });
+   
   
 }catch (error) {
     console.error('Error:', error);
