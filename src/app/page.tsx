@@ -7,16 +7,22 @@ import { useRouter } from 'next/navigation';
 export default function HomePage() {
   const [prompt, setPrompt] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit =async () => {
+    setLoading(true);
     try {
       const response= await axios.post('/api/responseGeneration', {
       prompt: prompt.trim(),})
       router.push('/pages/generator')
+      
     console.log(response.data);
     } catch (error) {
       console.error('Error generating response:', error);
+    }
+    finally {
+      setLoading(false);
     }
     
   }
@@ -153,8 +159,21 @@ export default function HomePage() {
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-400 h-6 w-6" />
               
-              <button onClick={handleSubmit} className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white rounded-lg px-5 py-2 hover:bg-indigo-700 transition">
-                Generate
+              <button
+                onClick={handleSubmit}
+                disabled={loading}
+                className={`absolute right-3 top-1/2 transform -translate-y-1/2 rounded-lg px-5 py-2 transition flex items-center justify-center
+                  ${loading ? 'bg-indigo-800 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'} text-white`}
+              >
+                {loading ? (
+                  <div className="flex space-x-1">
+                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"></span>
+                  </div>
+                ) : (
+                  'Generate'
+                )}
               </button>
               
             </div>
